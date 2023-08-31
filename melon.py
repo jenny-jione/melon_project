@@ -59,11 +59,22 @@ def get_monthly_top_songs(month:int, year:int, num:int) -> list:
 def get_one_year(year:int, num:int) -> list:
     lists = []
     for i in range(12):
+        print(str(i+1),"월")
+        month = i+1
+        
+        today = datetime.today()
+        cur_year = today.year
+        cur_month = today.month
+        print(cur_year, year, cur_month, month)
+        print(type(cur_year), type(year), type(cur_month), type(month))
+        
+        if (cur_year == year) and (cur_month == month):
+            print('break')
+            break
+        
         month_calendar = driver.find_element(By.CLASS_NAME, "month_calendar")
         month_btn = month_calendar.find_elements(By.CLASS_NAME, "btn")   # 12개
         month_btn[i].click()
-        print(str(i+1),"월")
-        month = i+1
 
         # 선택한 월의 곡 목록 가져오기
         lists.append(get_monthly_top_songs(month, year, num))
@@ -83,7 +94,7 @@ def check_year(target_year:int) -> list:
             print(year)
 
             # # 1~12월 곡 리스트 가져오는 함수
-            my_list.append(get_one_year(year, 10))
+            my_list.append(get_one_year(int(year), 10))
             time.sleep(0.5)
 
             # # 이전 년도로 이동
@@ -114,7 +125,9 @@ def save_to_file(lists: list):
 
 
 if __name__ == "__main__":
-
+    
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     url = 'https://member.melon.com/muid/web/login/login_informM.htm'
     driver.get(url)
@@ -133,7 +146,7 @@ if __name__ == "__main__":
     calendar.click()
     time.sleep(2)
 
-    mylist = check_year(target_year=2010)
+    mylist = check_year(target_year=2022)
     save_to_file(mylist)
 
     driver.quit()
