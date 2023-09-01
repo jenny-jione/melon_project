@@ -125,7 +125,7 @@ if __name__ == "__main__":
     
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     url = 'https://member.melon.com/muid/web/login/login_informM.htm'
     driver.get(url)
 
