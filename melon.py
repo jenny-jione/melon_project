@@ -73,6 +73,10 @@ def get_one_year(year:int, num:int) -> list:
 
         # 선택한 월의 곡 목록 가져오기
         lists.append(get_monthly_top_songs(month, year, num))
+        month_data = lists[-1]
+        for data in month_data:
+            print(data)
+        print()
         driver.find_element(By.CLASS_NAME, "d_btn_calenadar").click()
     return lists
 
