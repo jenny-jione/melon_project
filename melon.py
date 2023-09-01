@@ -36,9 +36,6 @@ def get_monthly_top_songs(month:int, year:int, num:int) -> list:
             msl.append(year)
             msl.append(month)
             msl.append(title)
-            if i==0:
-                print(title)
-                print()
             msl.append(artist)
             msl.append(rank)
             cnt += 1
@@ -65,8 +62,6 @@ def get_one_year(year:int, num:int) -> list:
         today = datetime.today()
         cur_year = today.year
         cur_month = today.month
-        print(cur_year, year, cur_month, month)
-        print(type(cur_year), type(year), type(cur_month), type(month))
         
         if (cur_year == year) and (cur_month == month):
             print('break')
@@ -100,8 +95,6 @@ def check_year(target_year:int) -> list:
             # # 이전 년도로 이동
             driver.find_element(By.CLASS_NAME, "btn_round.small.pre").click()
             year = driver.find_element(By.CLASS_NAME, "date").text
-    
-    print(my_list)
 
     return my_list
 
